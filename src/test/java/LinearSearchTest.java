@@ -45,6 +45,6 @@ public class LinearSearchTest {
             l.add(i, String.valueOf(i));
         }
         String actual = (String) l.search(5);
-        assertThat("5", is(actual));
+        assertThat(actual, is("5"));
     }
 }
