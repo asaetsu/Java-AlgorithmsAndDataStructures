@@ -1,4 +1,5 @@
-import static org.junit.Assert.assertEquals;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 import org.junit.After;
 import org.junit.Before;
@@ -44,6 +45,6 @@ public class LinearSearchTest {
             l.add(i, String.valueOf(i));
         }
         String actual = (String) l.search(5);
-        assertEquals("5", actual);
+        assertThat("5", is(actual));
     }
 }
