@@ -1,50 +1,69 @@
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class LinearSearchTest {
-    LinearSearch l;
 
-    @Before
-    public void setUp() {
-        l = new LinearSearch();
-    }
+    public static class 初期状態の場合 {
 
-    @After
-    public void tearDown() {
-        l = null;
-    }
+        LinearSearch l;
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
+        @Before
+        public void setUp() {
+            l = new LinearSearch();
+        }
 
-    @Test
-    public void testAdd() {
-        for (int i = 1; i < 101; i++) {
-            l.add(i, String.valueOf(i));
+        @Test
+        public void testAdd() {
+            l.add(1, "one");
+            String actual = (String) l.search(1);
+            assertThat(actual, is("one"));
+        }
+
+        @Test
+        public void testSearch() {
+            String actual = (String) l.search(1);
+            assertThat(actual, is(nullValue()));
         }
     }
 
-    @Test
-    public void testAddForIllegalStateException() throws Exception {
-        thrown.expect(IllegalStateException.class);
-        thrown.expectMessage("データの個数が多すぎます。");
-        for (int i = 1; i < 102; i++) {
-            l.add(i, String.valueOf(i));
-        }
-    }
+    public static class データが追加されている場合 {
 
-    @Test
-    public void testSearch() {
-        for (int i = 1; i < 101; i++) {
-            l.add(i, String.valueOf(i));
+        LinearSearch l;
+
+        @Before
+        public void setUp() {
+            l = new LinearSearch();
+            l.add(1, "one");
         }
-        String actual = (String) l.search(5);
-        assertThat(actual, is("5"));
+
+        @Test
+        public void testSearch() {
+            String actual = (String) l.search(1);
+            assertThat(actual, is("one"));
+        }
+
+        @Test
+        public void testAdd() {
+            l.add(2, "two");
+            String actual = (String) l.search(2);
+            assertThat(actual, is("two"));
+        }
+
+        @Rule
+        public ExpectedException thrown = ExpectedException.none();
+
+        @Test
+        public void testAddForIllegalStateException() throws Exception {
+            thrown.expect(IllegalStateException.class);
+            thrown.expectMessage("データの個数が多すぎます。");
+            for (int i = 1; i < 101; i++) {
+                l.add(i, String.valueOf(i));
+            }
+        }
     }
 }
