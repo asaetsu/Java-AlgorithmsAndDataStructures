@@ -80,5 +80,15 @@ public class GenericStackTest {
             String actual = g.toString();
             assertThat(actual, is("GenericStack=[1]"));
         }
+
+        @Test
+        public void testLIFOOrder() {
+            g.push(2);
+            g.push(3);
+
+            assertThat(g.pop(), is(3));
+            assertThat(g.pop(), is(2));
+            assertThat(g.pop(), is(1));
+        }
     }
 }
