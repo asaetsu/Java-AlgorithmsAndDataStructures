@@ -12,17 +12,17 @@ public class GenericStackTest {
 
     public static class 初期状態の場合 {
 
-        GenericStack g;
+        GenericStack<Integer> g;
 
         @Before
         public void setUp() {
-            g = new GenericStack();
+            g = new GenericStack<Integer>();
         }
 
         @Test
         public void testPush() {
             g.push(1);
-            assertThat((Integer) g.pop(), is(1));
+            assertThat(g.pop(), is(1));
         }
 
         @Rule
@@ -49,23 +49,23 @@ public class GenericStackTest {
 
     public static class データが追加されている場合 {
 
-        GenericStack g;
+        GenericStack<Integer> g;
 
         @Before
         public void setUp() {
-            g = new GenericStack();
+            g = new GenericStack<Integer>();
             g.push(1);
         }
 
         @Test
         public void testPush() {
             g.push(2);
-            assertThat((Integer) g.pop(), is(2));
+            assertThat(g.pop(), is(2));
         }
 
         @Test
         public void testPop() {
-            Integer value = (Integer) g.pop();
+            Integer value = g.pop();
             assertThat(value, is(1));
         }
 
