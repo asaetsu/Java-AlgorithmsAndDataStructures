@@ -80,5 +80,12 @@ public class MyQueueTest {
                 m.enqueu(String.valueOf(i));
             }
         }
+
+        @Test
+        public void testClear() {
+            assertFalse(m.isEmpty());
+            m.clear();
+            assertTrue(m.isEmpty());
+        }
     }
 }
