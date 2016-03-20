@@ -78,14 +78,16 @@ public class MyDoubleLinkedListTest {
         @Test
         public void testremoveFirst() {
             list.insertLast("b");
-            list.removeFirst();
+            String removedData = (String) list.removeFirst();
+            assertThat(removedData, is("a"));
             assertThat(list.toString(), is("[b]"));
         }
 
         @Test
         public void testremoveLast() {
             list.insertLast("b");
-            list.removeLast();
+            String removedData = (String) list.removeLast();
+            assertThat(removedData, is("b"));
             assertThat(list.toString(), is("[a]"));
         }
 
